@@ -1,0 +1,143 @@
+    1  clear
+    2  python3 --version
+    3  sudo apt remove python3
+    4  sudo apt autoremove
+    5  sudo apt install wget
+    6  python3 --version
+    7  clear
+    8  cd ~
+    9  mkdir ~/libraries ~/local
+   10  cd ~/libraries
+   11  wget https://www.zlib.net/zlib-1.3.1.tar.gz
+   12  tar -xvf zlib-1.3.1.tar.gz
+   13  cd zlib-1.3.1
+   14  ./configure --prefix=$HOME/local
+   15  cd ..
+   16  sudo apt install build-essential
+   17  cd libraries
+   18  cd zlib-1.3.1
+   19  ./configure --prefix=$HOME/local
+   20  make -j$(nproc)
+   21  make install
+   22  cd ..
+   23  wget https://www.openssl.org/source/openssl-1.1.1w.tar.gz
+   24  tar -xvf openssl-1.1.1w.tar.gz
+   25  cd openssl-1.1.1w
+   26  ./config --prefix=$HOME/local
+   27  make -j$(nproc)
+   28  make install
+   29  cd ..
+   30  wget https://github.com/libffi/libffi/releases/download/v3.4.5/libffi-3.4.5.tar.gz
+   31  tar -xvf libffi-3.4.5.tar.gz
+   32  cd libffi-3.4.5
+   33  ./configure --prefix=$HOME/local
+   34  make -j$(nproc)
+   35  make install
+   36  cd ..
+   37  wget https://www.python.org/ftp/python/3.10.16/Python-3.10.16.tgz
+   38  tar -xvf Python-3.10.16.tgz
+   39  cd Python-3.10.16
+   40  ./configure --prefix=$HOME/local \--with-ensurepip=install \LDFLAGS="-L$HOME/local/lib" \CPPFLAGS="-I$HOME/local/include" \PKG_CONFIG_PATH="$HOME/local/lib/pkgconfig" \--enable-optimization
+   41  ./configure --prefix=$HOME/local \--with-openssl=$HOME/local \--with-ensurepip=install \LDFLAGS="-L$HOME/local/lib" \CPPFLAGS="-I$HOME/local/include" \PKG_CONFIG_PATH="$HOME/local/lib/pkgconfig" \--enable-optimization
+   42  make -j$(nproc)
+   43  make install
+   44  make
+   45  make install
+   46  cd ..
+   47  export PATH=$HOME/local/bin:$PATH
+   48  echo --$PATH
+   49  python3 --version
+   50  export PATH=$HOME/openssl/bin:$PATH
+   51  LD_LIBRARY_PATH=$HOME/openssl/lib:$LD_LIBRARY_PATH
+   52  cd local
+   53  ls
+   54  cd bin
+   55  ls bin
+   56  ls
+   57  export PATH=$HOME/local/openssl/bin:$PATH
+   58  LD_LIBRARY_PATH=$HOME/local/openssl/lib:$LD_LIBRARY_PATH
+   59  cd ..
+   60  cd libraries
+   61  cd Python-3.10.16
+   62  ./configure --prefix=$HOME/local \--with-openssl=$HOME/local \--with-ensurepip=install \LDFLAGS="-L$HOME/local/lib" \CPPFLAGS="-I$HOME/local/include" \PKG_CONFIG_PATH="$HOME/local/lib/pkgconfig" \--enable-optimization
+   63  make
+   64  make install
+   65  cd ..
+   66  export PATH=$HOME/local/openssl/bin:$PATH
+   67  export LD_LIBRARY_PATH=$HOME/local/openssl/lib:$LD_LIBRARY_PATH
+   68  cd Python-3.10.16
+   69  cd libraries
+   70  cd Python-3.10.16
+   71  ./configure --prefix=$HOME/local \--with-openssl=$HOME/local \--with-ensurepip=install \LDFLAGS="-L$HOME/local/lib" \CPPFLAGS="-I$HOME/local/include" \PKG_CONFIG_PATH="$HOME/local/lib/pkgconfig" \--enable-optimization
+   72  make
+   73  cd ..
+   74  export LD_LIBRARY_PATH=$HOME/openssl/lib:$LD_LIBRARY_PATH
+   75  export PATH=$HOME/openssl/bin:$PATH
+   76  cd libraries
+   77  cd Python-3.10.16
+   78  ./configure --prefix=$HOME/local \--with-openssl=$HOME/local \--with-ensurepip=install \LDFLAGS="-L$HOME/local/lib" \CPPFLAGS="-I$HOME/local/include" \PKG_CONFIG_PATH="$HOME/local/lib/pkgconfig" \--enable-optimization
+   79  make
+   80  cd ..
+   81  cd openssl-1.1.1w
+   82  ./config --prefix=$HOME/openssl --openssldir=$HOME/openssl
+   83  make
+   84  make install
+   85  cd ..
+   86  export PATH=$HOME/openssl/bin:$PATH
+   87  export LD_LIBRARY_PATH=$HOME/openssl/lib:$LD_LIBRARY_PATH
+   88  cd Python-3.10.16
+   89  ./configure --prefix=$HOME/local \--with-openssl=$HOME/local \--with-ensurepip=install \LDFLAGS="-L$HOME/local/lib" \CPPFLAGS="-I$HOME/local/include" \PKG_CONFIG_PATH="$HOME/local/lib/pkgconfig" \--enable-optimization
+   90  make
+   91  make install
+   92  python3.10 -m venv myenv
+   93  source myenv/bin/activate
+   94  pip install label_studio
+   95  pip install --upgrade pip
+   96  pip install label_studio
+   97  label-studio
+   98  exit
+   99  history > history.txt
+  100  nano history.txt
+  101  ls
+  102  nano history.txt
+  103  cat history.txt
+  104  less history.txt
+  105  more history.txt
+  106  cd libraries
+  107  wget https://www.sqlite.org/2023/sqlite-autoconf-3420000.tar.gz
+  108  tar -xzf sqlite-autoconf-3420000.tar.gz
+  109  cd sqlite-autoconf-3420000
+  110  ./configure --prefix=$HOME/local
+  111  make -j$(nproc)
+  112  make install
+  113  cd ..
+  114  cd Python-3.10.6
+  115  cd Python-3.10.16
+  116  ./configure --prefix=$HOME/local \--with-openssl=$HOME/local \--with-ensurepip=install \LDFLAGS="-L$HOME/local/lib" \CPPFLAGS="-I$HOME/local/include" \PKG_CONFIG_PATH="$HOME/local/lib/pkgconfig" \--enable-optimization
+  117  make
+  118  export LDFLAGS="-L$HOME/local/lib"
+  119  export CPPFLAGS="-I$HOME/local/include"
+  120  export PKG_CONFIG_PATH="$HOME/local/lib/pkgconfig"
+  121  ./configure --prefix=$HOME/local \--with-openssl=$HOME/local \--with-ensurepip=install \LDFLAGS="-L$HOME/local/lib" \CPPFLAGS="-I$HOME/local/include" \PKG_CONFIG_PATH="$HOME/local/lib/pkgconfig" \--enable-optimization
+  122  make
+  123  export PATH=$HOME/openssl/bin:$PATH
+  124  export LD_LIBRARY_PATH=$HOME/openssl/lib:$LD_LIBRARY_PATH
+  125  ./configure --prefix=$HOME/local \--with-openssl=$HOME/local \--with-ensurepip=install \LDFLAGS="-L$HOME/local/lib" \CPPFLAGS="-I$HOME/local/include" \PKG_CONFIG_PATH="$HOME/local/lib/pkgconfig" \--enable-optimization
+  126  make
+  127  make install
+  128  python3.10 -m venv my
+  129  python3 -m venv my
+  130  python3.10 -m venv my
+  131  export PATH=$HOME/local/bin:$PATH
+  132  echo $PATH
+  133  python3.10 -m venv my
+  134  source my/bin/activate
+  135  pip install label-studio
+  136  label-studio
+  137  pip install label-studio
+  138  label-studio
+  139  hsitory
+  140  deactivate
+  141  history
+  142  cd ..
+  143  history > his.txt
